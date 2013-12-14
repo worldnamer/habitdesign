@@ -7,6 +7,7 @@ group :test do
   gem 'database_cleaner', '~> 1.0.1' # JWLL: There's a bug in 1.1 that expects postgresql even if you're not using it
   gem 'debugger'
   gem 'timecop'
+  gem 'factory_girl_rails', ">= 4.0" # fixtures
 end
 
 group :assets do
@@ -34,8 +35,11 @@ gem 'ngmin-rails'
 # Optimized JSON (Oj) for speeding up serialization
 gem 'oj'
 
+gem 'devise' # Authentication
+
 group :development do
   gem 'sqlite3'
+  gem 'debugger'
 end
 
 group :production do

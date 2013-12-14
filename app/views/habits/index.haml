@@ -1,0 +1,12 @@
+%table.table.table-striped.table-bordered.table-hover
+  %thead
+    %tr
+      %th Habit
+      - (1..@days_in_month).each do |i|
+        %th= i
+  %tbody
+    %tr
+      %td Hello World
+      - (1..@days_in_month).each do |i|
+        %td
+          d
