@@ -7,4 +7,5 @@ angular
         .when('/', {templateUrl: '/habits'})
         # .when('/users/login', {templateUrl:'/users/login.html'})
         # .when('/users/register', {templateUrl:'/users/register.html'});
+        .otherwise({redirectTo: '/'})
   ])
