@@ -8,6 +8,7 @@ group :test do
   gem 'debugger'
   gem 'timecop'
   gem 'factory_girl_rails', ">= 4.0" # fixtures
+  gem 'cucumber-rails', require: false # Acceptance testing
 end
 
 group :assets do
