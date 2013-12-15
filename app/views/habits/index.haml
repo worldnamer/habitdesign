@@ -2,8 +2,7 @@
   %thead
     %tr
       %th Habit
-      - (1..@days_in_month).each do |i|
-        %th= i
+      %th{:"ng-repeat" => "day in habits[0].days"} {{day.d}}
   %tbody
     %tr.habit-row{:"ng-repeat" => "habit in habits"}
       %td{id: "{{habit.id}}", :"ng-click" => "habit.renaming = true"}
@@ -11,8 +10,7 @@
           {{habit.description}}
         %form{:"ng-show" => "habit.renaming", :"ng-submit" => "rename(habit)"}
           %input{name: "habit{{habit.id}}", value: "{{habit.description}}"}
-      - (1..@days_in_month).each do |i|
-        %td
-          d
+      %td{:"ng-repeat" => "day in habit.days"}
+        %input{type: "checkbox", :"ng-model" => "day.v"}
 
 .btn.add-habit{:"ng-click" => "add()"} Add Habit

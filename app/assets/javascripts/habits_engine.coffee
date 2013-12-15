@@ -6,7 +6,19 @@ angular
         constructor: () ->
 
         all: () ->
-          $resource('/habits.json').query()
+          habits = $resource('/habits.json', {}, 
+            query:
+              method: 'GET',
+              isArray: true,
+              transformResponse:
+                (data, headersGetter) ->
+                  habits = angular.fromJson(data);
+                  for habit in habits
+                    for day, i in habit.days
+                      habit.days[i] = {d: i+1, v: day == 1}
+                  habits
+
+          ).query()
 
         add: () ->
           $resource('/habits').save()

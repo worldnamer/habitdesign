@@ -12,12 +12,18 @@ class HabitsController < ApplicationController
       year = year+1
     end
     last_day_of_month = (Date.new(year, month, 1) - 1.day)
-    @days_in_month = last_day_of_month.day
 
     respond_to do |format|
       format.html
       format.json do
-        render json: current_user.habits.to_json
+        habits = current_user.habits.map do |habit|
+          {
+            id: habit.id,
+            description: habit.description,
+            days: (1..last_day_of_month.day).map { 0 }
+          }
+        end
+        render json: habits.to_json
       end
     end
   end

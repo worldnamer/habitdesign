@@ -3,22 +3,37 @@ require 'spec_helper'
 describe HabitsController do
   describe 'GET index' do
     let(:user) { create(:user) }
+    let!(:habit) { user.habits.create(description: 'description')}
     before(:each) { sign_in user }
-
-    it 'returns the number of days in the month' do
-      Timecop.freeze(Time.new(2013,2,1,0,0,0)) do
-        get :index
-
-        assigns(:days_in_month).should == 28
-      end
-    end
 
     it 'handles december' do
       Timecop.freeze(Time.new(2013,12,1,0,0,0)) do
-        get :index
-
-        assigns(:days_in_month).should == 31
+        get :index, {format: :json}
       end
+
+      habits = JSON.parse(response.body)
+
+      habits.length.should == 1
+      
+      habit = habits.first
+
+      habit["days"].length.should == 31
+    end
+
+    it 'returns habits for the current user' do
+      Timecop.freeze(Time.new(2013,2,1,0,0,0)) do
+        get :index, {format: :json}
+      end
+
+      habits = JSON.parse(response.body)
+
+      habits.length.should == 1
+      
+      habit = habits.first
+      habit["description"].should == 'description'
+
+      habit["days"].length.should == 28
+      habit["days"].each { |day| day.should == 0 }
     end
   end
 
