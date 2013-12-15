@@ -32,4 +32,16 @@ describe HabitsController do
       user.habits.reload.count.should == 1
     end
   end
+
+  describe 'PUT update' do
+    let(:user) { create(:user) }
+    let(:habit) { user.habits.create(description: 'description')}
+    before(:each) { sign_in user }
+
+    it 'updates the description of the habit' do
+      put :update, {id: habit.id, description: 'new description'}
+
+      habit.reload.description.should == 'new description'
+    end
+  end
 end

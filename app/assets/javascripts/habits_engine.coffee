@@ -6,11 +6,17 @@ angular
         constructor: () ->
 
         all: () ->
-          habits = $resource('/habits.json').query()
-          habits
+          $resource('/habits.json').query()
 
         add: () ->
-          habit = $resource('/habits').save()
+          $resource('/habits').save()
+
+        update: (habit) ->
+          $resource("/habits/:id", {id: habit.id},
+            update:
+              method: 'PUT'
+          ).update(habit)
+
   )
   .controller('HabitsController',
     ($scope, $timeout, Habit) ->
@@ -20,4 +26,12 @@ angular
       $scope.add = () ->
         habit = habit_resource.add()
         $scope.habits.push(habit)
+
+      $scope.rename = (habit) ->
+        description = $("td##{habit.id} form input").val()
+
+        habit.description = description
+        delete habit.renaming
+
+        habit_resource.update(habit)
   )

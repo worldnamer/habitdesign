@@ -26,4 +26,12 @@ class HabitsController < ApplicationController
     habit = current_user.habits.create
     render json: habit.to_json
   end
+
+  def update
+    habit = current_user.habits.where(id: params[:id]).first
+    habit.description = params[:description]
+    habit.save
+
+    render nothing: true
+  end
 end

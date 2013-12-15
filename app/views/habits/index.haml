@@ -6,7 +6,11 @@
         %th= i
   %tbody
     %tr.habit-row{:"ng-repeat" => "habit in habits"}
-      %td {{habit.description}}
+      %td{id: "{{habit.id}}", :"ng-click" => "habit.renaming = true"}
+        .desc{:"ng-show" => "!habit.renaming"} 
+          {{habit.description}}
+        %form{:"ng-show" => "habit.renaming", :"ng-submit" => "rename(habit)"}
+          %input{name: "habit{{habit.id}}", value: "{{habit.description}}"}
       - (1..@days_in_month).each do |i|
         %td
           d
