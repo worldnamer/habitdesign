@@ -1,4 +1,8 @@
+require 'application_helper'
+
 class PreventDeviseRedirects < Devise::FailureApp
+  include ApplicationHelper
+
   def respond
     if http_auth?
       http_auth
@@ -18,7 +22,7 @@ class PreventDeviseRedirects < Devise::FailureApp
       flash[:alert] = i18n_message
     end
 
-    custom_redirect_url = "/##{redirect_url}"
+    custom_redirect_url = angularize(redirect_url)
     redirect_to custom_redirect_url
   end
 end
