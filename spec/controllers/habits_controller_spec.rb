@@ -79,4 +79,22 @@ describe HabitsController do
       habit.reload.habit_dates.count.should == 1
     end
   end
+
+  describe 'DELETE remove_date' do
+    let(:user) { create(:user) }
+    let!(:habit) { user.habits.create(description: 'description')}
+    let!(:date) { user.habits.first.habit_dates.create(date: Date.new(2013,12,2))}
+    before(:each) { sign_in user }
+
+    it 'removes the date' do
+      delete :remove_date, {id: habit.id, date: '2013-12-2'}
+
+      habit.reload.habit_dates.count.should == 0
+    end
+
+    it 'does not balk at removing the same date twice' do
+      delete :remove_date, {id: habit.id, date: '2013-12-2'}
+      delete :remove_date, {id: habit.id, date: '2013-12-2'}
+    end
+  end
 end

@@ -31,6 +31,10 @@ When /^I view my habits$/ do
   visit angularize(habits_path)
 end
 
+When /^I unflag the first day$/ do
+  step "I flag the first day of my habit" # JWLL: Functionally the same thing, but with different set up
+end
+
 Then /^I should see that habit on my habits list$/ do
   visit angularize(habits_path)
 
@@ -47,4 +51,10 @@ Then /^my habit should have the first day set$/ do
   visit angularize(habits_path)
 
   find(:xpath, "//tr/td[2]/input").should be_checked
+end
+
+Then /^my habit should have no set days$/ do
+  visit angularize(habits_path)
+
+  page.all(:css, 'tr.habit-row input').first.should_not be_checked
 end

@@ -33,6 +33,11 @@ angular
           today = new Date()
           day = "#{today.getFullYear()}-#{today.getMonth()+1}-#{day.d}"
           $resource("/habits/:id/days/:day", {id: habit.id, day: day}).save()
+
+        removeDay: (habit, day) ->
+          today = new Date()
+          day = "#{today.getFullYear()}-#{today.getMonth()+1}-#{day.d}"
+          $resource("/habits/:id/days/:day", {id: habit.id, day: day}).remove()
   )
   .controller('HabitsController',
     ($scope, $timeout, Habit) ->
@@ -54,4 +59,6 @@ angular
       $scope.changeDay = (habit, day) ->
         if day.v
           habit_resource.setDay(habit, day)
+        else
+          habit_resource.removeDay(habit, day)
   )

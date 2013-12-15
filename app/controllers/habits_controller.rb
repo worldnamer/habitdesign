@@ -11,6 +11,16 @@ class HabitsController < ApplicationController
     render nothing: true
   end
 
+  def remove_date
+    habit = Habit.find(params[:id])
+    date = Date.parse(params[:date])
+
+    habit_date = habit.habit_dates.find_by_date(date)
+    habit_date.try(:destroy)
+
+    render nothing: true
+  end
+
   def index
     today = Date.today
     year = today.year
