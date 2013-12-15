@@ -2,7 +2,7 @@ class HabitsController < ApplicationController
   layout "angular"
 
   before_filter :authenticate_user!
-  
+
   def index
     today = Date.today
     year = today.year
@@ -20,5 +20,10 @@ class HabitsController < ApplicationController
         render json: current_user.habits.to_json
       end
     end
+  end
+
+  def create
+    habit = current_user.habits.create
+    render json: habit.to_json
   end
 end

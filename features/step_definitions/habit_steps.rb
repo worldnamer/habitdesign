@@ -1,5 +1,7 @@
 When /^I create a habit$/ do
-  @habit = @user.habits.create(description: 'Test')
+  visit angularize(habits_path)
+
+  find(".add-habit").click
 end
 
 Then /^I should see that habit on my habits list$/ do

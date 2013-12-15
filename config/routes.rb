@@ -1,5 +1,5 @@
 Habitdesign::Application.routes.draw do
-  resources :habits, only: [:index]
+  resources :habits, only: [:index, :create]
 
   devise_for :users, only: []
   devise_scope :user do

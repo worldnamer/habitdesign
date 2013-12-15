@@ -21,4 +21,15 @@ describe HabitsController do
       end
     end
   end
+
+  describe 'POST create' do
+    let(:user) { create(:user) }
+    before(:each) { sign_in user }
+
+    it 'adds a habit to the user' do
+      post :create
+
+      user.habits.reload.count.should == 1
+    end
+  end
 end
