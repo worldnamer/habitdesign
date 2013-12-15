@@ -1,5 +1,9 @@
 Habitdesign::Application.routes.draw do
-  resources :habits, only: [:index, :create, :update]
+  resources :habits, only: [:index, :create, :update] do
+    member do
+      post "days/:date" => 'habits#set_date'
+    end
+  end
 
   devise_for :users, only: []
   devise_scope :user do

@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131215040000) do
+ActiveRecord::Schema.define(:version => 20131215203236) do
+
+  create_table "habit_dates", :force => true do |t|
+    t.date    "date"
+    t.integer "habit_id"
+  end
+
+  add_index "habit_dates", ["habit_id", "date"], :name => "index_habit_dates_on_habit_id_and_date"
 
   create_table "habits", :force => true do |t|
     t.string  "description"

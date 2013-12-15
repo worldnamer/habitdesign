@@ -59,4 +59,24 @@ describe HabitsController do
       habit.reload.description.should == 'new description'
     end
   end
+
+  describe 'POST set_date' do
+    let(:user) { create(:user) }
+    let(:habit) { user.habits.create(description: 'description')}
+    before(:each) { sign_in user }
+
+    it 'updates the description of the habit' do
+      post :set_date, {id: habit.id, date: '2013-12-2'}
+
+      habit.reload.habit_dates.count.should == 1
+      habit.habit_dates.first.date.should == Date.new(2013, 12, 2)
+    end
+
+    it 'does not create more than one date for the same inputs' do
+      post :set_date, {id: habit.id, date: '2013-12-2'}
+      post :set_date, {id: habit.id, date: '2013-12-2'}
+
+      habit.reload.habit_dates.count.should == 1
+    end
+  end
 end

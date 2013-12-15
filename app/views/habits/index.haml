@@ -11,6 +11,6 @@
         %form{:"ng-show" => "habit.renaming", :"ng-submit" => "rename(habit)"}
           %input{name: "habit{{habit.id}}", value: "{{habit.description}}"}
       %td{:"ng-repeat" => "day in habit.days"}
-        %input{type: "checkbox", :"ng-model" => "day.v"}
+        %input{type: "checkbox", :"ng-model" => "day.v", :"ng-change" => "changeDay(habit, day)"}
 
 .btn.add-habit{:"ng-click" => "add()"} Add Habit

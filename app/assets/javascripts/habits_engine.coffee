@@ -29,6 +29,10 @@ angular
               method: 'PUT'
           ).update(habit)
 
+        setDay: (habit, day) ->
+          today = new Date()
+          day = "#{today.getFullYear()}-#{today.getMonth()+1}-#{day.d}"
+          $resource("/habits/:id/days/:day", {id: habit.id, day: day}).save()
   )
   .controller('HabitsController',
     ($scope, $timeout, Habit) ->
@@ -46,4 +50,8 @@ angular
         delete habit.renaming
 
         habit_resource.update(habit)
+
+      $scope.changeDay = (habit, day) ->
+        if day.v
+          habit_resource.setDay(habit, day)
   )
