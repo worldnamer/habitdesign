@@ -13,5 +13,12 @@ class HabitsController < ApplicationController
     end
     last_day_of_month = (Date.new(year, month, 1) - 1.day)
     @days_in_month = last_day_of_month.day
+
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: current_user.habits.to_json
+      end
+    end
   end
 end

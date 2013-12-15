@@ -3,6 +3,7 @@ Feature: Create habit
   I want to create new habits
   So I can track them
 
+  @javascript
   Scenario: No habits
     Given a user
     When I create a habit

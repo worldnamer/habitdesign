@@ -9,6 +9,10 @@ group :test do
   gem 'timecop'
   gem 'factory_girl_rails', ">= 4.0" # fixtures
   gem 'cucumber-rails', require: false # Acceptance testing
+
+  # JWLL: There are some changes from 2.1.0 that haven't been released that fixes a bug in clicking on buttons that aren't in forms
+  gem 'capybara', git: 'git://github.com/jnicklas/capybara'
+  gem 'capybara-webkit'
 end
 
 group :assets do

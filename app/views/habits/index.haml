@@ -5,9 +5,10 @@
       - (1..@days_in_month).each do |i|
         %th= i
   %tbody
-    - current_user.habits.each do |habit|
-      %tr.habit-row
-        %td= habit.description
-        - (1..@days_in_month).each do |i|
-          %td
-            d
+    %tr.habit-row{:"ng-repeat" => "habit in habits"}
+      %td {{habit.description}}
+      - (1..@days_in_month).each do |i|
+        %td
+          d
+
+.btn.add-habit Add Habit
