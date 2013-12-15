@@ -1,18 +1,18 @@
-Given(/^an anonymous user$/) do
+Given(/^I am an anonymous user$/) do
   logout :user
 end
 
-Given(/^a user with an existing account$/) do
+Given(/^I am a user with an existing account$/) do
   @user = create(:user)
 end
 
-Given(/^a user$/) do
+Given(/^I am a user$/) do
   @user = create(:user)
 
   login_as @user
 end
 
-Given /^a user with a habit$/ do
+Given /^I am a user with a habit$/ do
   @user = create(:user)
   @habit = @user.habits.create(description: "description")
 

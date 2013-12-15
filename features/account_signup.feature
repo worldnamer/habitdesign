@@ -4,11 +4,11 @@ Feature: Sign up
   So I can track my habits
 
   Scenario: No account
-    Given an anonymous user
+    Given I am an anonymous user
     When I sign up for an account
     Then my account should be created
 
   Scenario: Existing account
-    Given a user with an existing account
+    Given I am a user with an existing account
     When I sign up again
     Then I should get an account creation error

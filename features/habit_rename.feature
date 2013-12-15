@@ -5,6 +5,6 @@ Feature: Rename habit
 
   @javascript
   Scenario: With a habit
-  	Given a user with a habit
+  	Given I am a user with a habit
   	When I edit the habit description
   	Then I should see the new description on my list of habits

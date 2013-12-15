@@ -5,6 +5,6 @@ Feature: Create habit
 
   @javascript
   Scenario: No habits
-    Given a user
+    Given I am a user
     When I create a habit
     Then I should see that habit on my habits list
