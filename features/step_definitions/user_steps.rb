@@ -6,6 +6,12 @@ Given(/^a user with an existing account$/) do
   @user = create(:user)
 end
 
+Given(/^a user$/) do
+  @user = create(:user)
+
+  login_as @user
+end
+
 When(/^I sign up for an account$/) do
   visit new_user_registration_path
   fill_in 'user_email', with: 'test@example.org'
