@@ -6,6 +6,9 @@ Habitdesign::Application.routes.draw do
     get 'users/sign_in' => 'sessions#new', as: :new_user_session
     post 'users/sign_in' => 'sessions#create', as: :user_session
     get 'users/sign_out' => 'sessions#destroy', as: :destroy_user_session
+    get 'users/sign_up' => 'registrations#new', as: :new_user_registration
+    post 'users' => 'registrations#create', as: :user_registration
+    get 'users/password/new' => 'passwords#new', as: :new_user_password
   end
 
   root :to => 'welcome#index'

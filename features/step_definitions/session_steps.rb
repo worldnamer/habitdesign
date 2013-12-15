@@ -16,14 +16,14 @@ Then(/^I should get an account sign in error$/) do
   page.should have_content 'Invalid email or password'
 end
 
-# Then(/^I should get an account creation error$/) do
-#   page.should have_content 'Email has already been taken'
-# end
+Then(/^I should get an account creation error$/) do
+  page.should have_content 'Email has already been taken'
+end
 
 Then(/^I should be logged in$/) do
   page.should have_content 'Signed in successfully'
 end
 
-# Then(/^my account should be created$/) do
-#   page.should have_content 'Welcome! You have signed up successfully.'
-# end
+Then(/^my account should be created$/) do
+  page.should have_content 'Welcome! You have signed up successfully.'
+end
