@@ -67,4 +67,11 @@ class HabitsController < ApplicationController
 
     render nothing: true
   end
+
+  def destroy
+    habit = Habit.find(params[:id])
+    habit.destroy() if habit.user_id == current_user.id
+
+    render nothing: true
+  end
 end

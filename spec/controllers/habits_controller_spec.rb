@@ -97,4 +97,25 @@ describe HabitsController do
       delete :remove_date, {id: habit.id, date: '2013-12-2'}
     end
   end
+
+  describe 'DELETE destroy' do
+    let(:user) { create(:user) }
+    let!(:habit) { user.habits.create(description: 'description')}
+    before(:each) { sign_in user }
+
+    it 'removes the habit' do
+      delete :destroy, {id: habit.id}
+
+      user.reload.habits.length.should == 0
+    end
+
+    it 'does not remove habits unless they belong to you' do
+      other_user_habit = create(:habit)
+      other_user = other_user_habit.user
+
+      delete :destroy, {id: other_user_habit.id}
+
+      other_user.reload.habits.length.should == 1
+    end
+  end
 end

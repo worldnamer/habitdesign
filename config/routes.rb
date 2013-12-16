@@ -1,5 +1,5 @@
 Habitdesign::Application.routes.draw do
-  resources :habits, only: [:index, :create, :update] do
+  resources :habits, only: [:index, :create, :update, :destroy] do
     member do
       post "days/:date" => 'habits#set_date'
       delete "days/:date" => 'habits#remove_date'

@@ -1,10 +1,13 @@
 %table.habits.table.table-striped.table-bordered.table-hover
   %thead
     %tr
+      %th
       %th Habit
       %th{:"ng-repeat" => "day in habits[0].days"} {{day.d}}
   %tbody
     %tr.habit-row{:"ng-repeat" => "habit in habits"}
+      %td{:"ng-click" => "remove(habit)"}
+        %i.icon-remove
       %td{id: "{{habit.id}}", :"ng-click" => "habit.renaming = true"}
         .desc{:"ng-show" => "!habit.renaming"} 
           {{habit.description}}

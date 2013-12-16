@@ -23,6 +23,9 @@ angular
         add: () ->
           $resource('/habits').save()
 
+        remove: (habit) ->
+          $resource("/habits/:id", {id: habit.id}).remove()
+
         update: (habit) ->
           $resource("/habits/:id", {id: habit.id},
             update:
@@ -61,4 +64,8 @@ angular
           habit_resource.setDay(habit, day)
         else
           habit_resource.removeDay(habit, day)
+
+      $scope.remove = (habit) ->
+        habit_resource.remove(habit)
+        $scope.habits.splice($scope.habits.indexOf(habit), 1)
   )
