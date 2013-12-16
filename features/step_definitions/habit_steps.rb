@@ -70,3 +70,7 @@ Then /^I should have no habits$/ do
 
   page.all(:css, 'tr.habit-row').length.should == 0
 end
+
+Then /^I should see the days of the month$/ do
+  page.all(:css, 'th').length.should be > 28
+end

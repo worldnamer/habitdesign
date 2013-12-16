@@ -5,6 +5,11 @@ angular
       class Habit
         constructor: () ->
 
+        days_in_range: () ->
+          today = new Date()
+          last_of_month = new Date(today.getFullYear(), today.getMonth(), 0).getDate()
+          [1..(last_of_month+1)]
+
         all: () ->
           habits = $resource('/habits.json', {}, 
             query:
@@ -21,7 +26,11 @@ angular
           ).query()
 
         add: () ->
-          $resource('/habits').save()
+          habit = $resource('/habits').save({}, () =>
+            today = new Date()
+            last_of_month = new Date(today.getFullYear(), today.getMonth(), 0).getDate()
+            habit.days = @days_in_range().map((day) -> { d: day, v: false })
+          )
 
         remove: (habit) ->
           $resource("/habits/:id", {id: habit.id}).remove()
@@ -45,7 +54,10 @@ angular
   .controller('HabitsController',
     ($scope, $timeout, Habit) ->
       habit_resource = new Habit()
+
       $scope.habits = habit_resource.all()
+      
+      $scope.days_in_range = habit_resource.days_in_range()
 
       $scope.add = () ->
         habit = habit_resource.add()

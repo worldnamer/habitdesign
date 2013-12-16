@@ -3,7 +3,7 @@
     %tr
       %th
       %th Habit
-      %th{:"ng-repeat" => "day in habits[0].days"} {{day.d}}
+      %th{:"ng-repeat" => "day in days_in_range"} {{day}}
   %tbody
     %tr.habit-row{:"ng-repeat" => "habit in habits"}
       %td{:"ng-click" => "remove(habit)"}
