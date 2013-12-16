@@ -30,6 +30,7 @@ angular
             today = new Date()
             last_of_month = new Date(today.getFullYear(), today.getMonth(), 0).getDate()
             habit.days = @days_in_range().map((day) -> { d: day, v: false })
+            habit.renaming = true
           )
 
         remove: (habit) ->
@@ -56,11 +57,18 @@ angular
       habit_resource = new Habit()
 
       $scope.habits = habit_resource.all()
-      
+
       $scope.days_in_range = habit_resource.days_in_range()
 
       $scope.add = () ->
         habit = habit_resource.add()
+        habit.$promise.then(() ->
+          $timeout(
+            () ->
+              $("input[name='habit#{habit.id}']").focus()
+            0
+          )
+        )
         $scope.habits.push(habit)
 
       $scope.rename = (habit) ->
