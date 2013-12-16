@@ -8,11 +8,11 @@
     %tr.habit-row{:"ng-repeat" => "habit in habits"}
       %td{:"ng-click" => "remove(habit)"}
         %i.icon-remove
-      %td{id: "{{habit.id}}", :"ng-click" => "habit.renaming = true"}
+      %td{id: "{{habit.id}}", :"ng-click" => "edit(habit)"}
         .desc{:"ng-show" => "!habit.renaming"} 
           {{habit.description}}
         %form{:"ng-show" => "habit.renaming", :"ng-submit" => "rename(habit)"}
-          %input{name: "habit{{habit.id}}", value: "{{habit.description}}"}
+          %input{name: "habit{{habit.id}}", value: "{{habit.description}}", :"ng-blur" => "rename(habit)"}
       %td{:"ng-repeat" => "day in habit.days"}
         %input{type: "checkbox", :"ng-model" => "day.v", :"ng-change" => "changeDay(habit, day)"}
 

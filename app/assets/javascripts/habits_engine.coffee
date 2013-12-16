@@ -60,16 +60,21 @@ angular
 
       $scope.days_in_range = habit_resource.days_in_range()
 
+      $scope.focus_habit = (habit) ->
+        $timeout(
+          () ->
+            $("input[name='habit#{habit.id}']").focus()
+          0
+        )
+
       $scope.add = () ->
         habit = habit_resource.add()
-        habit.$promise.then(() ->
-          $timeout(
-            () ->
-              $("input[name='habit#{habit.id}']").focus()
-            0
-          )
-        )
+        habit.$promise.then(() -> $scope.focus_habit(habit))
         $scope.habits.push(habit)
+
+      $scope.edit = (habit) ->
+        habit.renaming = true
+        $scope.focus_habit(habit)
 
       $scope.rename = (habit) ->
         description = $("td##{habit.id} form input").val()
