@@ -8,4 +8,4 @@ Feature: View habits
     Given I am logged-in
     When I view my habits
     Then I should have no habits
-    And I should see the days of the month
+    And I should see the current month

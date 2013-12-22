@@ -60,6 +60,17 @@ angular
 
       $scope.days_in_range = habit_resource.days_in_range()
 
+      $scope.dateRange = new DateRange
+      $scope.rangeString = $scope.dateRange.toString()
+
+      $scope.prev = () ->
+        $scope.dateRange.prev()
+        $scope.rangeString = $scope.dateRange.toString()
+
+      $scope.next = () ->
+        $scope.dateRange.next()
+        $scope.rangeString = $scope.dateRange.toString()
+
       $scope.focus_habit = (habit) ->
         $timeout(
           () ->

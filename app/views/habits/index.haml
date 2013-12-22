@@ -1,3 +1,9 @@
+.range-nav
+  %a.float-left{:"ng-click" => "prev()"}
+    &lt;
+  %a.float-right{:"ng-click" => "next()"}
+    &gt;
+  .range-text {{ rangeString }}
 %table.habits.table.table-striped.table-bordered.table-hover
   %thead
     %tr
