@@ -1,5 +1,5 @@
 angular
-  .module('habitplan.habits', [])
+  .module('habitplan.habits.resource', [])
   .factory('Habit',
     ($resource) ->
       class Habit
@@ -51,57 +51,4 @@ angular
           today = new Date()
           day = "#{today.getFullYear()}-#{today.getMonth()+1}-#{day.d}"
           $resource("/habits/:id/days/:day", {id: habit.id, day: day}).remove()
-  )
-  .controller('HabitsController',
-    ($scope, $timeout, Habit) ->
-      habit_resource = new Habit()
-
-      $scope.habits = habit_resource.all()
-
-      $scope.days_in_range = habit_resource.days_in_range()
-
-      $scope.dateRange = new DateRange
-      $scope.rangeString = $scope.dateRange.toString()
-
-      $scope.prev = () ->
-        $scope.dateRange.prev()
-        $scope.rangeString = $scope.dateRange.toString()
-
-      $scope.next = () ->
-        $scope.dateRange.next()
-        $scope.rangeString = $scope.dateRange.toString()
-
-      $scope.focus_habit = (habit) ->
-        $timeout(
-          () ->
-            $("input[name='habit#{habit.id}']").focus()
-          0
-        )
-
-      $scope.add = () ->
-        habit = habit_resource.add()
-        habit.$promise.then(() -> $scope.focus_habit(habit))
-        $scope.habits.push(habit)
-
-      $scope.edit = (habit) ->
-        habit.renaming = true
-        $scope.focus_habit(habit)
-
-      $scope.rename = (habit) ->
-        description = $("td##{habit.id} form input").val()
-
-        habit.description = description
-        delete habit.renaming
-
-        habit_resource.update(habit)
-
-      $scope.changeDay = (habit, day) ->
-        if day.v
-          habit_resource.setDay(habit, day)
-        else
-          habit_resource.removeDay(habit, day)
-
-      $scope.remove = (habit) ->
-        habit_resource.remove(habit)
-        $scope.habits.splice($scope.habits.indexOf(habit), 1)
   )
