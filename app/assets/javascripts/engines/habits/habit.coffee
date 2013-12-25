@@ -19,8 +19,11 @@ angular
                 (data, headersGetter) ->
                   habits = angular.fromJson(data);
                   for habit in habits
-                    for day, i in habit.days
-                      habit.days[i] = {d: i+1, v: day == 1}
+                    for set, i in habit.days
+                      baseDate = new Date(startDate.getTime())
+                      baseDate.setDate(baseDate.getDate()+i)
+                      formattedDate = "#{baseDate.getFullYear()}-#{baseDate.getMonth()+1}-#{baseDate.getDate()}"
+                      habit.days[i] = {d: formattedDate, v: set == 1}
                   habits
           ).query()
 
@@ -42,12 +45,8 @@ angular
           ).update(habit)
 
         setDay: (habit, day) ->
-          today = new Date()
-          day = "#{today.getFullYear()}-#{today.getMonth()+1}-#{day.d}"
-          $resource("/habits/:id/days/:day", {id: habit.id, day: day}).save()
+          $resource("/habits/:id/days/:day", {id: habit.id, day: day.d}).save()
 
         removeDay: (habit, day) ->
-          today = new Date()
-          day = "#{today.getFullYear()}-#{today.getMonth()+1}-#{day.d}"
-          $resource("/habits/:id/days/:day", {id: habit.id, day: day}).remove()
+          $resource("/habits/:id/days/:day", {id: habit.id, day: day.d}).remove()
   )

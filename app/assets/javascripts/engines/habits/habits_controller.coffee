@@ -14,10 +14,14 @@ angular
       $scope.prev = () ->
         $scope.dateRange.prev()
         $scope.rangeString = $scope.dateRange.toString()
+        $scope.days_in_range = $scope.dateRange.days_in_range()
+        $scope.habits = habit_resource.between($scope.dateRange.startDate, $scope.dateRange.endDate)
 
       $scope.next = () ->
         $scope.dateRange.next()
         $scope.rangeString = $scope.dateRange.toString()
+        $scope.days_in_range = $scope.dateRange.days_in_range()
+        $scope.habits = habit_resource.between($scope.dateRange.startDate, $scope.dateRange.endDate)
 
       $scope.focus_habit = (habit) ->
         $timeout(
