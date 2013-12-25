@@ -3,13 +3,12 @@ require 'spec_helper'
 describe HabitsController do
   describe 'GET index' do
     let(:user) { create(:user) }
-    let!(:habit) { user.habits.create(description: 'description')}
     before(:each) { sign_in user }
 
     it 'handles december' do
-      Timecop.freeze(Time.new(2013,12,1,0,0,0)) do
-        get :index, {format: :json}
-      end
+      user.habits.create(description: 'description')
+
+      get :index, {format: :json, startDate: '2013-12-1', endDate: '2013-12-31'}
 
       habits = JSON.parse(response.body)
 
@@ -21,9 +20,9 @@ describe HabitsController do
     end
 
     it 'returns habits for the current user' do
-      Timecop.freeze(Time.new(2013,2,1,0,0,0)) do
-        get :index, {format: :json}
-      end
+      user.habits.create(description: 'description')
+
+      get :index, {format: :json, startDate: '2013-2-1', endDate: '2013-2-28'}
 
       habits = JSON.parse(response.body)
 

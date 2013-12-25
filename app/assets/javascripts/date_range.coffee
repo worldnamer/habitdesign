@@ -7,10 +7,25 @@ class @DateRange
 
     @calcEndDate()
 
-  calcEndDate: () ->    
-    @endDate = new Date(@startDate.getTime())
-    @endDate.setMonth(@startDate.getMonth() + 1)
-    @endDate.setDate(-1)
+  days_in_range: () ->
+    days = []
+    date = new Date(@startDate.getTime())
+
+    while date <= @endDate
+      days.push(date.getDate())
+      date.setDate(date.getDate() + 1)
+
+    days
+
+  calcEndDate: () ->
+    year = @startDate.getFullYear()
+    month = @startDate.getMonth()
+    date = 31
+
+    @endDate = new Date(year, month, date)
+    until (@endDate.getMonth() == month) or (date == 28)
+      date -= 1
+      @endDate = new Date(year, month, date)
 
   prev: () ->
     @startDate.setMonth(@startDate.getMonth() - 1)

@@ -22,30 +22,29 @@ class HabitsController < ApplicationController
   end
 
   def index
-    today = Date.today
-    year = today.year
-    month = today.month
-
-    next_month = today.month+1
-    next_month_year = year
-    if next_month > 12
-      next_month = 1
-      next_month_year = next_month_year+1
+    if params[:startDate]
+      start_date = Date.parse(params[:startDate])
+    else
+      start_date = Date.today
     end
-    last_day_of_month = (Date.new(next_month_year, next_month, 1) - 1.day)
+
+    if params[:endDate]
+      end_date = Date.parse(params[:endDate])
+    else
+      end_date = Date.today
+    end
 
     respond_to do |format|
       format.html
       format.json do
         habits = current_user.habits.map do |habit|
           habit_dates = habit.habit_dates
-
           {
             id: habit.id,
             description: habit.description,
-            days: (1..last_day_of_month.day).map do |day| 
+            days: start_date.upto(end_date).map do |date|
               habit.habit_dates.find do |habit_date| 
-                habit_date.date == Date.new(year, month, day)
+                habit_date.date == date
               end ? 1 : 0
             end
           }

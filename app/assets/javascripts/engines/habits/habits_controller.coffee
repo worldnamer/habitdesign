@@ -4,12 +4,12 @@ angular
     ($scope, $timeout, Habit) ->
       habit_resource = new Habit()
 
-      $scope.habits = habit_resource.all()
-
-      $scope.days_in_range = habit_resource.days_in_range()
-
       $scope.dateRange = new DateRange
       $scope.rangeString = $scope.dateRange.toString()
+
+      $scope.habits = habit_resource.between($scope.dateRange.startDate, $scope.dateRange.endDate)
+
+      $scope.days_in_range = $scope.dateRange.days_in_range()
 
       $scope.prev = () ->
         $scope.dateRange.prev()
