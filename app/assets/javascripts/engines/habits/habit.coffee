@@ -5,23 +5,6 @@ angular
       class Habit
         constructor: () ->
 
-        all: () ->
-          habits = $resource('/habits', {}, 
-            query:
-              method: 'GET',
-              headers: {
-                'Accept': 'application/json'
-              },
-              isArray: true,
-              transformResponse:
-                (data, headersGetter) ->
-                  habits = angular.fromJson(data);
-                  for habit in habits
-                    for day, i in habit.days
-                      habit.days[i] = {d: i+1, v: day == 1}
-                  habits
-          ).query()
-
         between: (startDate, endDate) ->
           formattedStartDate = "#{startDate.getFullYear()}-#{startDate.getMonth() + 1}-#{startDate.getDate()}"
           formattedEndDate = "#{endDate.getFullYear()}-#{endDate.getMonth() + 1}-#{endDate.getDate()}"
