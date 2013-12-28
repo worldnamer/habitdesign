@@ -6,6 +6,8 @@ Habitdesign::Application.routes.draw do
     end
   end
 
+  resources :somedays, only: [:index]
+
   devise_for :users, only: []
   devise_scope :user do
     get 'users/sign_in' => 'sessions#new', as: :new_user_session
