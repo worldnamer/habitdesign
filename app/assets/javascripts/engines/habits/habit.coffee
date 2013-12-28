@@ -31,7 +31,8 @@ angular
           habit = $resource('/habits').save({}, () =>
             today = new Date()
             last_of_month = new Date(today.getFullYear(), today.getMonth(), 0).getDate()
-            habit.days = @days_in_range().map((day) -> { d: day, v: false })
+            date_range = new DateRange
+            habit.days = date_range.days_in_range().map((day) -> { d: day, v: false })
             habit.renaming = true
           )
 
