@@ -29,6 +29,18 @@ describe SomedaysController do
     end
   end
 
+  describe 'PUT update' do
+    let(:user) { create(:user) }
+    let(:someday) { user.somedays.create(description: 'description')}
+    before(:each) { sign_in user }
+
+    it 'updates the description of the someday' do
+      put :update, {id: someday.id, description: 'new description'}
+
+      someday.reload.description.should == 'new description'
+    end
+  end
+
   describe 'DELETE destroy' do
     let(:user) { create(:user) }
     let!(:someday) { user.somedays.create(description: 'description')}

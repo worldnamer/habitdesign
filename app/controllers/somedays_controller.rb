@@ -19,4 +19,12 @@ class SomedaysController < ApplicationController
 
     render nothing: true
   end
+
+  def update
+    someday = current_user.somedays.where(id: params[:id]).first
+    someday.description = params[:description]
+    someday.save
+
+    render nothing: true
+  end
 end
