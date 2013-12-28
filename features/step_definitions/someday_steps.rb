@@ -19,6 +19,18 @@ When /^I remove my someday habit$/ do
   find(:xpath, '//tbody/tr/td[1]').click
 end
 
+When /^I edit the someday habit description$/ do
+  visit angularize(habits_path)
+  find_by_id(@someday.id).click
+  fill_in "someday#{@someday.id}", with: 'new description'
+
+  page.execute_script("$(\"input[name='someday#{@someday.id}']\").submit()")
+end
+
+Then /^I should see the new description on my list of someday habits$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
 Then /^I should not see any someday habits$/ do
   page.should_not have_css('tr.someday')
 end
