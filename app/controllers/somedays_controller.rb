@@ -12,4 +12,11 @@ class SomedaysController < ApplicationController
 
     render json: someday.to_json
   end
+
+  def destroy
+    someday = Someday.find(params[:id])
+    someday.destroy() if someday.user_id == current_user.id
+
+    render nothing: true
+  end
 end

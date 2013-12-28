@@ -6,7 +6,7 @@ Habitdesign::Application.routes.draw do
     end
   end
 
-  resources :somedays, only: [:index, :create]
+  resources :somedays, only: [:index, :create, :destroy]
 
   devise_for :users, only: []
   devise_scope :user do
