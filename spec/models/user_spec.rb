@@ -9,4 +9,13 @@ describe User do
 
     user.habits.count.should == 1
   end
+
+  it 'has somedays' do
+    user = create(:user)
+    user.somedays.should == []
+
+    user.somedays.create(description: 'someday')
+
+    user.somedays.count.should == 1
+  end
 end
