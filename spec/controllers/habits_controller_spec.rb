@@ -6,7 +6,9 @@ describe HabitsController do
     before(:each) { sign_in user }
 
     it 'handles december' do
-      user.habits.create(description: 'description')
+      Timecop.freeze(Date.new(2013,12,10)) do
+        user.habits.create(description: 'description')
+      end
 
       get :index, {format: :json, startDate: '2013-12-1', endDate: '2013-12-31'}
 
@@ -20,7 +22,9 @@ describe HabitsController do
     end
 
     it 'returns habits for the current user' do
-      user.habits.create(description: 'description')
+      Timecop.freeze(Date.new(2013,2,10)) do
+        user.habits.create(description: 'description')
+      end
 
       get :index, {format: :json, startDate: '2013-2-1', endDate: '2013-2-28'}
 
@@ -33,6 +37,16 @@ describe HabitsController do
 
       habit["days"].length.should == 28
       habit["days"].each { |day| day.should == 0 }
+    end
+
+    it 'does not return habits before their creation date' do
+      user.habits.create(description: 'description')
+
+      get :index, {format: :json, startDate: 5.days.ago.strftime('%Y-%-m-%-d'), endDate: 4.days.ago.strftime('%Y-%-m-%-d')}
+
+      habits = JSON.parse(response.body)
+
+      habits.length.should == 0
     end
   end
 

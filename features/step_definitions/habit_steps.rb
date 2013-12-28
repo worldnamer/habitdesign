@@ -1,3 +1,10 @@
+Given /^I have a habit$/ do
+  @user = create(:user)
+  @habit = @user.habits.create(description: "description")
+
+  login_as @user
+end
+
 Given /^I have a habit with the first day set$/ do
   step 'I have a habit'
 
@@ -5,6 +12,12 @@ Given /^I have a habit with the first day set$/ do
   month = today.month
   year = today.year
   @habit.habit_dates.create(date: Date.new(year, month, 1))
+end
+
+Given /^I have an old habit$/ do
+  Timecop.freeze(2013, 11, 1) do
+    step 'I have a habit'
+  end
 end
 
 When /^I create a habit$/ do
@@ -41,6 +54,12 @@ When /^I remove my habit$/ do
   find(:xpath, '//tbody/tr/td[1]').click
 end
 
+When /^I view the previous month$/ do
+  step 'I view my habits'
+
+  find(".prev-link").click
+end
+
 Then /^I should see that habit on my habits list$/ do
   visit angularize(habits_path)
 
@@ -66,8 +85,6 @@ Then /^my habit should have no set days$/ do
 end
 
 Then /^I should have no habits$/ do
-  visit angularize(habits_path)
-
   page.all(:css, 'tr.habit-row').length.should == 0
 end
 
@@ -76,4 +93,8 @@ Then /^I should see the current month$/ do
   page.should have_content today.strftime("%B") # JWLL: Month name
 
   page.all(:css, 'th').length.should be > 28
+end
+
+Then /^I should see the habit$/ do
+  page.all(:css, 'tr.habit-row').length.should == 1
 end

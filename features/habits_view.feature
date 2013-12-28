@@ -9,3 +9,17 @@ Feature: View habits
     When I view my habits
     Then I should have no habits
     And I should see the current month
+
+  @javascript
+  Scenario: Old habits
+  	Given I am logged-in
+  	And I have an old habit
+  	When I view the previous month
+  	Then I should see the habit
+
+  @javascript
+  Scenario: A new habit
+    Given I am logged-in
+    And I have a habit
+    When I view the previous month
+    Then I should have no habits

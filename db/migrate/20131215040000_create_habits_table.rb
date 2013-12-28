@@ -4,6 +4,8 @@ class CreateHabitsTable < ActiveRecord::Migration
       t.string :description
 
       t.references :user
+
+      t.timestamps
     end
 
     add_index :habits, :user_id

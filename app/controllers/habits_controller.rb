@@ -37,7 +37,7 @@ class HabitsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        habits = current_user.habits.map do |habit|
+        habits = current_user.habits.active(end_date).map do |habit|
           habit_dates = habit.habit_dates
           {
             id: habit.id,

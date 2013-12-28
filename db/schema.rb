@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131215203236) do
+ActiveRecord::Schema.define(:version => 20131225011659) do
 
   create_table "habit_dates", :force => true do |t|
     t.date    "date"
@@ -21,8 +21,11 @@ ActiveRecord::Schema.define(:version => 20131215203236) do
   add_index "habit_dates", ["habit_id", "date"], :name => "index_habit_dates_on_habit_id_and_date"
 
   create_table "habits", :force => true do |t|
-    t.string  "description"
-    t.integer "user_id"
+    t.string   "description"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.date     "ended_at"
   end
 
   add_index "habits", ["user_id"], :name => "index_habits_on_user_id"
