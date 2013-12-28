@@ -21,3 +21,11 @@
         %input{type: "checkbox", :"ng-model" => "day.v", :"ng-change" => "changeDay(habit, day)"}
 
 .btn.add-habit{:"ng-click" => "add()"} Add Habit
+
+%table.somedays.table.table-striped.table-bordered.table-hover
+  %thead
+    %tr
+      %th Someday
+  %tbody
+    %tr.someday{:"ng-repeat" => "someday in somedays"}
+      %td {{ someday.description }}

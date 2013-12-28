@@ -1,7 +1,7 @@
 angular
-  .module('habitplan.habits', ['habitplan.habits.resource'])
+  .module('habitplan.habits', ['habitplan.habits.resource', 'habitplan.somedays.resource'])
   .controller('HabitsController',
-    ($scope, $timeout, Habit) ->
+    ($scope, $timeout, Habit, Someday) ->
       habit_resource = new Habit()
 
       $scope.dateRange = new DateRange
@@ -10,6 +10,9 @@ angular
       $scope.habits = habit_resource.between($scope.dateRange.startDate, $scope.dateRange.endDate)
 
       $scope.days_in_range = $scope.dateRange.days_in_range()
+
+      somedays_resource = new Someday()
+      $scope.somedays = somedays_resource.all()
 
       $scope.prev = () ->
         $scope.dateRange.prev()
