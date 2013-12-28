@@ -1,8 +1,6 @@
 .range-nav
-  %a.prev-link{:"ng-click" => "prev()"}
-    &lt;
-  %a.next-link{:"ng-click" => "next()"}
-    &gt;
+  %a.prev-link{:"ng-click" => "prev()"} &lt;
+  %a.next-link{:"ng-click" => "next()"} &gt;
   .range-text {{ rangeString }}
 %table.habits.table.table-striped.table-bordered.table-hover
   %thead
