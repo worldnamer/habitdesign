@@ -23,3 +23,9 @@ Feature: View habits
     And I have a habit
     When I view the previous month
     Then I should have no habits
+
+  @javascript
+  Scenario: Forward nav
+    Given I am logged-in
+    When I view my habits
+    Then the forward arrow should be missing

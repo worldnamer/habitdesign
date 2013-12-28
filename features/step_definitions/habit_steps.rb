@@ -98,3 +98,7 @@ end
 Then /^I should see the habit$/ do
   page.all(:css, 'tr.habit-row').length.should == 1
 end
+
+Then /^the forward arrow should be missing$/ do
+  page.should_not have_css('.next-link')
+end

@@ -44,3 +44,6 @@ class @DateRange
       "#{month} #{@startDate.getFullYear()}"
     else
       month
+
+  maxed: () ->
+    @endDate <= new Date
