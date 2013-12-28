@@ -4,4 +4,10 @@ class SomedaysController < ApplicationController
   def index
     respond_with current_user.somedays
   end
+
+  def create
+    current_user.somedays.create
+    
+    respond_with :nothing
+  end
 end
