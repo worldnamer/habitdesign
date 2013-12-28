@@ -30,4 +30,10 @@
         %th Someday
     %tbody
       %tr.someday{:"ng-repeat" => "someday in somedays"}
-        %td {{ someday.description }}
+        %td{id: "{{someday.id}}", :"ng-click" => "edit(someday)"}
+          .desc{:"ng-show" => "!someday.renaming"} 
+            {{someday.description}}
+          %form{:"ng-show" => "someday.renaming", :"ng-submit" => "rename(someday)"}
+            %input{name: "someday{{someday.id}}", value: "{{someday.description}}", :"ng-blur" => "rename(someday)"}
+
+  .btn.add-someday{:"ng-click" => "add()"} Add Someday

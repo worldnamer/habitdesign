@@ -7,4 +7,9 @@ angular
 
         all: () ->
           somedays = $resource("/somedays.json").query()
+
+        add: () ->
+          someday = $resource('/somedays').save({}, () =>
+            someday.renaming = true
+          )
   )

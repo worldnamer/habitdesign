@@ -1,13 +1,15 @@
 class SomedaysController < ApplicationController
-  respond_to :json
-
   def index
-    respond_with current_user.somedays
+    respond_to do |format|
+      format.json do
+        render json: current_user.somedays
+      end
+    end
   end
 
   def create
-    current_user.somedays.create
-    
-    respond_with :nothing
+    someday = current_user.somedays.create
+
+    render json: someday.to_json
   end
 end
