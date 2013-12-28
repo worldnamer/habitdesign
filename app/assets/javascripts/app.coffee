@@ -1,5 +1,5 @@
 angular
-  .module('habitplan', ['ngRoute', 'ngResource', 'habitplan.habits'])
+  .module('habitplan', ['ngRoute', 'ngResource', 'habitplan.habits', 'habitplan.somedays'])
   .config([
     '$httpProvider', 
     ($httpProvider) ->
@@ -9,6 +9,6 @@ angular
     '$routeProvider', 
       ($routeProvider) ->
         $routeProvider
-        .when('/', {templateUrl: '/habits', controller: 'HabitsController'})
+        .when('/', {templateUrl: '/habits'})
         .otherwise({redirectTo: '/'})
   ])
