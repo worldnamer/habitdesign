@@ -31,7 +31,7 @@ angular
         )
 
       $scope.add = () ->
-        habit = habit_resource.add()
+        habit = habit_resource.add($scope.dateRange.startDate)
         habit.$promise.then(() -> $scope.focus_habit(habit))
         $scope.habits.push(habit)
 

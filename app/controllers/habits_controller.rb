@@ -55,7 +55,10 @@ class HabitsController < ApplicationController
   end
 
   def create
-    habit = current_user.habits.create
+    startDate = params[:startDate]
+    started_at = Date.parse(startDate) if startDate
+
+    habit = current_user.habits.create(started_at: started_at)
     render json: habit.to_json
   end
 

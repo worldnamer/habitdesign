@@ -59,6 +59,12 @@ describe HabitsController do
 
       user.habits.reload.count.should == 1
     end
+
+    it 'accepts a start date' do
+      post :create, {startDate: '2013-1-20'}
+
+      user.habits.reload.first.started_at.should == Date.new(2013,1,20)
+    end
   end
 
   describe 'PUT update' do

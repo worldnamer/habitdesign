@@ -27,11 +27,12 @@ angular
                   habits
           ).query()
 
-        add: () ->
-          habit = $resource('/habits').save({}, () =>
-            today = new Date()
-            last_of_month = new Date(today.getFullYear(), today.getMonth(), 0).getDate()
+        add: (startDate) ->
+          formattedDate = "#{startDate.getFullYear()}-#{startDate.getMonth()+1}-#{startDate.getDate()}"
+          habit = $resource('/habits').save({startDate: formattedDate}, () =>
             date_range = new DateRange
+            date_range.startDate = startDate
+            date_range.calcEndDate()
             habit.days = date_range.days_in_range().map((day) -> { d: day, v: false })
             habit.renaming = true
           )

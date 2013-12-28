@@ -24,6 +24,8 @@ When /^I create a habit$/ do
   visit angularize(habits_path)
 
   find(".add-habit").click
+
+  page.should have_css('form')
 end
 
 When /^I edit the habit description$/ do
@@ -101,4 +103,9 @@ end
 
 Then /^the forward arrow should be missing$/ do
   page.should_not have_css('.next-link')
+end
+
+Then /^my habit should be old$/ do
+  today = Date.today
+  Habit.first.started_at.should == Date.new(today.year, today.month, 1)
 end
