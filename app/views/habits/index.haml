@@ -27,9 +27,12 @@
   %table.somedays.table.table-striped.table-bordered.table-hover
     %thead
       %tr
+        %th
         %th Someday
     %tbody
       %tr.someday{:"ng-repeat" => "someday in somedays"}
+        %td{:"ng-click" => "remove(someday)"}
+          %i.icon-remove
         %td{id: "{{someday.id}}", :"ng-click" => "edit(someday)"}
           .desc{:"ng-show" => "!someday.renaming"} 
             {{someday.description}}

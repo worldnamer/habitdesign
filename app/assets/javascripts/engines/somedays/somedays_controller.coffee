@@ -16,4 +16,8 @@ angular
         someday = somedays_resource.add()
         someday.$promise.then(() -> $scope.focus_someday(someday))
         $scope.somedays.push(someday)
+
+      $scope.remove = (someday) ->
+        somedays_resource.remove(someday)
+        $scope.somedays.splice($scope.somedays.indexOf(someday), 1)
   )

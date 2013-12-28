@@ -12,4 +12,7 @@ angular
           someday = $resource('/somedays').save({}, () =>
             someday.renaming = true
           )
+
+        remove: (someday) ->
+          $resource("/somedays/:id", {id: someday.id}).remove()
   )
