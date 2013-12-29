@@ -40,7 +40,7 @@ angular
         $scope.focus_habit(habit)
 
       $scope.rename = (habit) ->
-        description = $("td##{habit.id} form input").val()
+        description = $("input[name='habit#{habit.id}']").val()
 
         habit.description = description
         delete habit.renaming

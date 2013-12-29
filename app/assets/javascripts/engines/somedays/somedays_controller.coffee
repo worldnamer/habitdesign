@@ -22,7 +22,7 @@ angular
         $scope.focus_someday(someday)
 
       $scope.rename = (someday) ->
-        description = $("td##{someday.id} form input").val()
+        description = $("input[name='someday#{someday.id}']").val()
 
         someday.description = description
         delete someday.renaming
