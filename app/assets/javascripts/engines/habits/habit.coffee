@@ -33,7 +33,7 @@ angular
             date_range = new DateRange
             date_range.startDate = startDate
             date_range.calcEndDate()
-            habit.days = date_range.days_in_range().map((day) -> { d: day, v: false })
+            habit.days = date_range.days_in_range().map((day) -> { d: "#{startDate.getFullYear()}-#{startDate.getMonth()+1}-#{day}", v: false })
             habit.renaming = true
           )
 
