@@ -53,6 +53,10 @@ angular
         else
           habit_resource.removeDay(habit, day)
 
+      $scope.toggleDay = (habit, day) ->
+        day.v = !day.v
+        $scope.changeDay(habit, day)
+
       $scope.remove = (habit) ->
         habit_resource.remove(habit)
         $scope.habits.splice($scope.habits.indexOf(habit), 1)

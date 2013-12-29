@@ -39,7 +39,7 @@ end
 When /^I flag the first day of my habit$/ do
   visit angularize(habits_path)
 
-  find(:xpath, "//tr/td[3]/input").click()
+  page.first(:css, ".habit-day").click()
 end
 
 When /^I view my habits$/ do
@@ -77,13 +77,13 @@ end
 Then /^my habit should have the first day set$/ do
   visit angularize(habits_path)
 
-  find(:xpath, "//tr/td[3]/input").should be_checked
+  find(:xpath, "//tr/td[3]/input", visible: false).should be_checked
 end
 
 Then /^my habit should have no set days$/ do
   visit angularize(habits_path)
 
-  page.all(:css, 'tr.habit-row input').first.should_not be_checked
+  page.all(:css, 'tr.habit-row input', visible: false).first.should_not be_checked
 end
 
 Then /^I should have no habits$/ do

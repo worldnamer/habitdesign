@@ -18,8 +18,9 @@
             {{habit.description}}
           %form{:"ng-show" => "habit.renaming", :"ng-submit" => "rename(habit)"}
             %input{name: "habit{{habit.id}}", value: "{{habit.description}}", :"ng-blur" => "rename(habit)"}
-        %td{:"ng-repeat" => "day in habit.days"}
-          %input{type: "checkbox", :"ng-model" => "day.v", :"ng-change" => "changeDay(habit, day)"}
+        %td.habit-day{:"ng-repeat" => "day in habit.days", :"ng-click" => "toggleDay(habit, day)"}
+          %input{id: "habit{{habit.id}}-day{{day.d}}", type: "checkbox", :"ng-model" => "day.v"}
+          %label{for: "habit{{habit.id}}-day{{day.d}}"}
 
   .btn.add-habit{:"ng-click" => "add()"} Add Habit
 
